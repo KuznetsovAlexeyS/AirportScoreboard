@@ -1,0 +1,5 @@
+17 10 Boeing 738 Departure Moscow
+21 14 Sukhoi Superjet 100 Departure Kiev
+0 3 Boeing 738 Arrival Kiev
+2 2 Sukhoi Superjet 100 Departure Minsk
+2 29 Boeing 738 Arrival Minsk

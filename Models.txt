@@ -1,0 +1,5 @@
+Airplane name - capacity
+Boeing 737 200
+Boeing 738 180
+Boeing 739 130
+Sukhoi Superjet 100 100
