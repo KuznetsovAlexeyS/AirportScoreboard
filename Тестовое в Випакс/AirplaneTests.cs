@@ -15,11 +15,11 @@ namespace AirportScoreboard
 			var airplane = new Airplane("Sukhoi Superjet 100", date, "City", Direction.In);
 			// Change this test, when "Sukhoi Superjet 100" will be removed from Models.
 			Assert.IsTrue(
-				airplane.Model == "Sukhoi Superjet 100" ||
-				airplane.Time == date ||
-				airplane.City == "City" ||
-				airplane.Direction == Direction.In ||
-				airplane.Passengers > 0 ||
+				airplane.Model == "Sukhoi Superjet 100" &&
+				airplane.Time == date &&
+				airplane.City == "City" &&
+				airplane.Direction == Direction.In &&
+				airplane.Passengers > 0 &&
 				airplane.Passengers <= 100
 				);
 		}

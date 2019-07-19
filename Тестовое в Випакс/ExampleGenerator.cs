@@ -21,9 +21,9 @@ namespace AirportScoreboard
 			{
 				var str = new StringBuilder();
 				var numberOfModel = rnd.Next(GetAmountOfModels());
-				str.Append(date.Hour.ToString() + " " + date.Minute.ToString() + " ");
+				str.Append(date.Year.ToString() + " " + date.Month.ToString() + " " + date.Day.ToString() 
+					+ " " + date.Hour.ToString() + " " + date.Minute.ToString() + " ");
 				date = date.AddMinutes(rnd.Next(10, 300));
-				str.Append(GetModel(numberOfModel) + " ");
 				if (rnd.Next(2) == 0)
 				{
 					str.Append("Arrival ");
@@ -33,7 +33,8 @@ namespace AirportScoreboard
 					str.Append("Departure ");
 				};
 				var city = cities[rnd.Next(3)];
-				str.Append(city);
+				str.Append(city + " ");
+				str.Append(GetModel(numberOfModel));
 				fullInfo.Add(str.ToString());
 			}
 			var path = Directory.GetCurrentDirectory() + "\\Example.txt";

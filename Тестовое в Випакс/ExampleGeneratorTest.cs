@@ -12,12 +12,31 @@ namespace AirportScoreboard
 	public class ExampleGeneratorTest
 	{
 		[Test]
+		public void ZeroValues()
+		{
+			ExampleGenerator.GenerateExample(0);
+			var path = Directory.GetCurrentDirectory() + "\\Example.txt";
+			string[] data = File.ReadAllLines(path);
+			Assert.IsTrue(data.Length == 0);
+		}
+
+		[Test]
 		public void GeneralRunning()
 		{
 			ExampleGenerator.GenerateExample(5);
 			var path = Directory.GetCurrentDirectory() + "\\Example.txt";
 			string[] data = File.ReadAllLines(path);
 			Assert.IsTrue(data.Length == 5);
+		}
+
+		[Test]
+		public void HugeValues()
+		{
+			var someHugeValue = 3000;
+			ExampleGenerator.GenerateExample(someHugeValue);
+			var path = Directory.GetCurrentDirectory() + "\\Example.txt";
+			string[] data = File.ReadAllLines(path);
+			Assert.IsTrue(data.Length == someHugeValue);
 		}
 	}
 }

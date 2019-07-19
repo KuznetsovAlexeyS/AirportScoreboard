@@ -106,12 +106,16 @@
     </Page>
     <Compile Include="Airplane.cs" />
     <Compile Include="AirplaneTests.cs" />
+    <Compile Include="Airport.cs" />
+    <Compile Include="AirportTests.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ExampleGeneratorTest.cs" />
     <Compile Include="ExampleGenerator.cs" />
+    <Compile Include="FlightInfoLine.cs" />
+    <Compile Include="FlightInfoLineTests.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
