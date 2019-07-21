@@ -5,7 +5,82 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirportScoreboard"
         mc:Ignorable="d"
-        Title="Информационное табло аэропорта" Height="350" Width="525">
-    <Grid>
+        Title="Информационное табло аэропорта" Height="350" Width="550">
+    <Grid Margin="0,0,0,0" Height="320" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="160*"/>
+            <RowDefinition Height="120*"/>
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="150*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Последний рейс" TextAlignment="Center" FontSize="20"/>
+            <TextBlock Grid.Column="1" Text="Время прибытия" TextAlignment="Center" FontSize="20"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="150*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="" TextAlignment="Center" FontSize="18" Name="RecentFlight"/> 
+            <TextBlock Grid.Column="1" Text="" TextAlignment="Center" FontSize="18" Name="RecentFlightTime"/>
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="150*"/>
+                <ColumnDefinition Width="150*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="40*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Прибыло в последнем рейсе" TextAlignment="Center" FontSize="12"/>
+                <TextBlock Grid.Row="1" Text="" TextAlignment="Center" FontSize="12" Name="ArrivedInRecentFlight"/>
+                <TextBlock Grid.Row="2" Text="Прибыло за сутки" TextAlignment="Center" FontSize="12"/>
+                <TextBlock Grid.Row="3" Text="" TextAlignment="Center" FontSize="12" Name="ArrivedInRecentDay"/>
+                <TextBlock Grid.Row="4" Text="Прибыло всего" TextAlignment="Center" FontSize="12"/>
+                <TextBlock Grid.Row="5" Text="" TextAlignment="Center" FontSize="12" Name="ArrivedGeneral"/>
+
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="40*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Вылетело в последнем рейсе" TextAlignment="Center" FontSize="12"/>
+                <TextBlock Grid.Row="1" Text="" TextAlignment="Center" FontSize="12" Name="DeparturedInRecentFlight"/>
+                <TextBlock Grid.Row="2" Text="Вылетело за сутки" TextAlignment="Center" FontSize="12"/>
+                <TextBlock Grid.Row="3" Text="" TextAlignment="Center" FontSize="12" Name="DeparturedInRecentDay"/>
+                <TextBlock Grid.Row="4" Text="Вылетело всего" TextAlignment="Center" FontSize="12"/>
+                <TextBlock Grid.Row="5" Text="" TextAlignment="Center" FontSize="12" Name="DeparturedGeneral"/>
+
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

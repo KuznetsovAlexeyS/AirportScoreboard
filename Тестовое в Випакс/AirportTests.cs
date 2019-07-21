@@ -36,7 +36,7 @@ namespace AirportScoreboard
 		}
 
 		[Test]
-		public void EndOfSchedule()
+		public void FarEndOfSchedule()
 		{
 			var path = Directory.GetCurrentDirectory() + "\\Example.txt";
 			string[] strs = File.ReadAllLines(path);
@@ -56,6 +56,32 @@ namespace AirportScoreboard
 			airport.AddTimeInMinutes(1);
 			airport.AddTimeInMinutes(1);
 			Assert.IsTrue(airport.RecentArrival.Time.Minute == 7 && airport.RecentArrival.Time.Hour == 7);
+		}
+
+		[Test]
+		public void EdgeIsAdded()
+		{
+			string[] strs = new string[3];
+			strs[0] = "2019 7 22 7 7 Arrival Minsk Boeing 739";
+			strs[1] = "2019 7 22 7 8 Arrival Moscow Sukhoi Superjet 100";
+			strs[2] = "2019 7 22 11 40 Arrival Kiev Boeing 739";
+			Airport airport = new Airport(strs);
+			airport.AddTimeInMinutes(280);
+			Assert.IsTrue(airport.RecentArrival.City == "Kiev" &&
+				airport.RecentArrival.Model == "Boeing 739" &&
+				airport.RecentArrival.Time.Minute == 40);
+		}
+
+		[Test]
+		public void Dequeueing() // We cant make correct Asserts, because passengers amount depends on random. So just watch debugging.
+		{
+			string[] strs = new string[3];
+			strs[0] = "2019 7 22 7 7 Arrival Minsk Boeing 739";
+			strs[1] = "2019 7 23 7 7 Arrival Moscow Sukhoi Superjet 100";
+			strs[2] = "2019 7 24 7 7 Arrival Kiev Boeing 739";
+			Airport airport = new Airport(strs);
+			airport.AddTimeInMinutes(24 * 60 + 1);
+			airport.AddTimeInMinutes(24 * 60 + 1);
 		}
 	}
 }

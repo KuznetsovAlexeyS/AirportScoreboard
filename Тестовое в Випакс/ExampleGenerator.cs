@@ -15,7 +15,7 @@ namespace AirportScoreboard
 			cities.Add("Kiev");
 			cities.Add("Minsk");
 			Random rnd = new Random();
-			DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, rnd.Next(29), rnd.Next(24), rnd.Next(60), rnd.Next(60));
+			DateTime date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, rnd.Next(29), rnd.Next(24), 0, 0);
 			List<string> fullInfo = new List<string>();
 			for (int i=0; i<length; i++)
 			{
