@@ -14,7 +14,7 @@ namespace AirportScoreboard
 		[Test]
 		public void DefaultValues()
 		{
-			var path = Directory.GetCurrentDirectory() + "\\Example.txt";
+			var path = "Schedule.txt";
 			string[] strs = File.ReadAllLines(path);
 			Airport airport = new Airport(strs);
 			airport.AddTimeInMinutes(600);
@@ -38,7 +38,7 @@ namespace AirportScoreboard
 		[Test]
 		public void FarEndOfSchedule()
 		{
-			var path = Directory.GetCurrentDirectory() + "\\Example.txt";
+			var path = "Schedule.txt";
 			string[] strs = File.ReadAllLines(path);
 			Airport airport = new Airport(strs);
 			airport.AddTimeInMinutes(10000000);
@@ -48,7 +48,7 @@ namespace AirportScoreboard
 		[Test]
 		public void SchedulePointer()
 		{
-			var path = Directory.GetCurrentDirectory() + "\\Example.txt";
+			var path = "Schedule.txt";
 			string[] strs = File.ReadAllLines(path);
 			Airport airport = new Airport(strs);
 			airport.AddTimeInMinutes(1);

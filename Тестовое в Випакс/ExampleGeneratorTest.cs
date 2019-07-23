@@ -15,7 +15,7 @@ namespace AirportScoreboard
 		public void ZeroValues()
 		{
 			ExampleGenerator.GenerateExample(0);
-			var path = Directory.GetCurrentDirectory() + "\\Example.txt";
+			var path = "Example.txt";
 			string[] data = File.ReadAllLines(path);
 			Assert.IsTrue(data.Length == 0);
 		}
@@ -24,7 +24,7 @@ namespace AirportScoreboard
 		public void GeneralRunning()
 		{
 			ExampleGenerator.GenerateExample(5);
-			var path = Directory.GetCurrentDirectory() + "\\Example.txt";
+			var path ="Example.txt";
 			string[] data = File.ReadAllLines(path);
 			Assert.IsTrue(data.Length == 5);
 		}
@@ -34,7 +34,7 @@ namespace AirportScoreboard
 		{
 			var someHugeValue = 3000;
 			ExampleGenerator.GenerateExample(someHugeValue);
-			var path = Directory.GetCurrentDirectory() + "\\Example.txt";
+			var path = "Example.txt";
 			string[] data = File.ReadAllLines(path);
 			Assert.IsTrue(data.Length == someHugeValue);
 		}
