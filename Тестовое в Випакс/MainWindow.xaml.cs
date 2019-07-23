@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,31 +18,58 @@ namespace AirportScoreboard
 {
 	public partial class MainWindow : Window
 	{
+		private Thread thread;
+		private int speed = 50000;
+
 		public MainWindow()
 		{
 			InitializeComponent();
-			Start();
 		}
 
-		private void Start()
+
+		protected override void OnContentRendered(EventArgs e)
 		{
-			var i = 0;
-			InterfaceLogicConnector ILC = new InterfaceLogicConnector("Schedule.txt", 1000);
-			while (i<10)
+			base.OnContentRendered(e);
+			thread = new Thread(() =>
 			{
-				ArrivedInRecentFlight.Text = ILC.ArrInRecentFlight.ToString();
-				ArrivedInRecentDay.Text = ILC.ArrInRecentDay.ToString();
-				ArrivedSummary.Text = ILC.ArrSummary.ToString();
-				DeparturedInRecentDay.Text = ILC.DepInRecentDay.ToString();
-				DeparturedInRecentFlight.Text = ILC.DepInRecentFlight.ToString();
-				DeparturedSummary.Text = ILC.DepSummary.ToString();
-				RecentFlightRoute.Text = ILC.RouteOfRecentFlight;
-				RecentFlightTime.Text = ILC.TimeOfRecentFlight;
-				CurrentTime.Text = ILC.CurrentTime.ToString();
+				try
+				{
+					foreach (var moment in Iterations())
+					{
+						var invokation = this.Dispatcher.BeginInvoke((Action)(() => UpdateInfo(moment)));
+						Thread.Sleep(100000 / this.speed);
+					}
+				}
+				catch
+				{
+					MessageBox.Show("Something is wrong");
+				}
+			})
+			{ IsBackground = true };
+			thread.Start();
+		}
+			
+		private IEnumerable<InterfaceLogicConnector> Iterations()
+		{
+			InterfaceLogicConnector ILC = new InterfaceLogicConnector("Schedule.txt", 10000);
+			while (true)
+			{
 				ILC.Iterate();
-				UpdateLayout();
-				i++;
+				yield return ILC;
 			}
+		}
+
+		private void UpdateInfo(InterfaceLogicConnector ILC)
+		{
+			ArrivedInRecentFlight.Text = ILC.ArrInRecentFlight.ToString();
+			ArrivedInRecentDay.Text = ILC.ArrInRecentDay.ToString();
+			ArrivedSummary.Text = ILC.ArrSummary.ToString();
+			DeparturedInRecentDay.Text = ILC.DepInRecentDay.ToString();
+			DeparturedInRecentFlight.Text = ILC.DepInRecentFlight.ToString();
+			DeparturedSummary.Text = ILC.DepSummary.ToString();
+			RecentFlightRoute.Text = ILC.RouteOfRecentFlight;
+			RecentFlightTime.Text = ILC.TimeOfRecentFlight;
+			CurrentTime.Text = ILC.CurrentTime.ToString();
 			UpdateLayout();
 		}
 	}
