@@ -1,0 +1,30 @@
+﻿<Window x:Class="AirportScoreboard.Info"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Тестовое_в_Випакс"
+        mc:Ignorable="d"
+        Title="Справка" Height="250" Width="450">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="35*"/>
+			<RowDefinition Height="60*"/>
+			<RowDefinition Height="35*"/>
+			<RowDefinition Height="35*"/>
+			<RowDefinition Height="35*"/>
+			<RowDefinition Height="60*"/>
+		</Grid.RowDefinitions>
+
+		<TextBlock Grid.Row="0" Text="F2 — выбрать файл с данными и начать отображение" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"  FontSize="14"/>
+		<TextBlock Grid.Row="1" Text="Файл с моделями самолётов находится в папке с программой" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"  FontSize="14"/>
+		<TextBlock Grid.Row="2" Text="F3 — установить скорость (начальная скорость — 1000)" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"  FontSize="14"/>
+		<TextBlock Grid.Row="3" Text="Скорость может быть от 1 до 10000" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"  FontSize="14"/>
+		<TextBlock Grid.Row="4" Text="Скорость, соответствующая реальной — 10" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"  FontSize="14"/>
+		<TextBlock Grid.Row="5" Text="После изменения скорости необходимо подождать, когда на табло пройдёт минута, чтобы изменения вступили в силу." 
+				   TextAlignment="Center" 
+				   VerticalAlignment="Center" 
+				   TextWrapping="Wrap"  
+				   FontSize="12"/>
+	</Grid>
+</Window>

@@ -15,22 +15,52 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
+using Microsoft.Win32;
 
 namespace AirportScoreboard
 {
 	public partial class MainWindow : Window
 	{
 		private Thread thread;
-		private int speed = 10000;
+		public int Speed { private set; get; }
+		private string filePath;
 
 		public MainWindow()
 		{
+			Speed = 1000;
 			InitializeComponent();
+
+			this.KeyDown += (sender, e) =>
+			{
+				switch (e.Key)
+				{
+					case Key.F1:
+						var info = new Info();
+						info.Show();
+						break;
+					case Key.F2:
+						OpenFileDialog openFileDialog = new OpenFileDialog();
+						if (openFileDialog.ShowDialog() == true)
+						{
+							filePath = openFileDialog.FileName;
+							RunDisplay();
+						}
+						break;
+					case Key.F3:
+						var setSpeedWindow = new SetSpeed();
+						setSpeedWindow.Show();
+						setSpeedWindow.Accept.Click += (send, args) =>
+						{
+							Speed = setSpeedWindow.Speed;
+							setSpeedWindow.Close();
+						};
+						break;
+				}
+			};
 		}
 
-		protected override void OnContentRendered(EventArgs e)
+		private void RunDisplay()
 		{
-			base.OnContentRendered(e);
 			DeclareChart();
 			thread = new Thread(() =>
 			{
@@ -38,12 +68,12 @@ namespace AirportScoreboard
 				{
 					foreach (var dataSlice in ExtractData())
 					{
-						this.Dispatcher.Invoke(() =>
+						this.Dispatcher.BeginInvoke((Action)(() =>
 						{
 							UpdateInfo(dataSlice);
-							UpdateCharts(dataSlice.ArrInDayByHours, dataSlice.DepInDayByHours);
-						});
-						Thread.Sleep(600000 / this.speed);
+							UpdateCharts(dataSlice.ArrInDayByHours, dataSlice.DepInDayByHours, dataSlice.CurrentTime);
+						}));
+						Thread.Sleep(600000 / this.Speed);
 					}
 				}
 				catch
@@ -103,14 +133,14 @@ namespace AirportScoreboard
 			Labels = new string[24];
 			for (int i = 0; i < Labels.Length; i++)
 			{
-				Labels[i] = i.ToString();
+				Labels[23-i] = i.ToString();
 			}
 			Formatter = value => value.ToString("N");
 			chart.DisableAnimations = true;
 			DataContext = this;
 		}
 
-		private void UpdateCharts(int[] arrInDayByHours, int[] depInDayByHours)
+		private void UpdateCharts(int[] arrInDayByHours, int[] depInDayByHours, DateTime currentTime)
 		{
 			var arrData = CastToDouble(arrInDayByHours);
 			var depData = CastToDouble(depInDayByHours);
@@ -118,14 +148,21 @@ namespace AirportScoreboard
 			SeriesCollection[0].Values.Clear();
 			for (int i = 0; i < 24; i++)
 			{
-				SeriesCollection[0].Values.Add(arrData[i]);
+				SeriesCollection[0].Values.Add(arrData[23-i]); // We are not arabs or japaneese, so its more comfortable for us to see columns flow from left to right
 			}
 
 			SeriesCollection[1].Values.Clear();
 			for (int i = 0; i < 24; i++)
 			{
-				SeriesCollection[1].Values.Add(depData[i]);
+				SeriesCollection[1].Values.Add(depData[23-i]);
 			}
+
+			for (int i = 0; i < Labels.Length; i++)
+			{
+				Labels[23-i] = currentTime.AddHours(24-i).Hour.ToString();
+			}
+			chart.UpdateLayout();
+
 		}
 
 		private double[] CastToDouble(int[] array)

@@ -1,0 +1,15 @@
+﻿<Window x:Class="AirportScoreboard.SetSpeed"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Тестовое_в_Випакс"
+        mc:Ignorable="d"
+        Title="Скорость"
+		Height="200" Width="300">
+    <Grid>
+		<TextBlock Grid.Column="0" Text="Текущая скорость" TextAlignment="Center" FontSize="14" Name="CurrentSpeedLabel"/>
+		<TextBox Name="DesiredSpeed"  Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="90" Margin="26,35,26,60"/>
+		<Button Name="Accept" Content="Установить" Margin="0,30,0,0" VerticalAlignment="Center" Width="75"/>
+	</Grid>
+</Window>
