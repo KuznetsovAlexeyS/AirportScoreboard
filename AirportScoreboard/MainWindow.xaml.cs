@@ -28,7 +28,7 @@ namespace AirportScoreboard
 
 		public MainWindow()
 		{
-			Speed = 1000;
+			Speed = 100;
 			InitializeComponent();
 
 			this.KeyDown += (sender, e) =>
@@ -79,7 +79,7 @@ namespace AirportScoreboard
 							UpdateInfo(dataSlice);
 							UpdateCharts(dataSlice.ArrInDayByHours, dataSlice.DepInDayByHours, dataSlice.CurrentTime);
 						}));
-						Thread.Sleep(600000 / this.Speed);
+						Thread.Sleep(60000 / this.Speed);
 					}
 				}
 				catch
@@ -93,7 +93,7 @@ namespace AirportScoreboard
 			
 		private IEnumerable<InterfaceLogicConnector> ExtractData()
 		{
-			InterfaceLogicConnector ILC = new InterfaceLogicConnector("Schedule.txt");
+			InterfaceLogicConnector ILC = new InterfaceLogicConnector(filePath);
 			while (true)
 			{
 				yield return ILC;
