@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Threading;
 
 namespace AirportScoreboard
 {
@@ -16,18 +15,19 @@ namespace AirportScoreboard
 		public string RouteOfRecentFlight { private set; get; }
 		public int ArrInRecentFlight { private set; get; }
 		public int ArrInRecentDay { private set; get; }
+		public int[] ArrInDayByHours { private set; get; }
 		public int ArrSummary { private set; get; }
 		public int DepInRecentFlight { private set; get; }
 		public int DepInRecentDay { private set; get; }
+		public int[] DepInDayByHours { private set; get; }
 		public int DepSummary { private set; get; }
+		public Direction RecentFlightDirection { private set; get; }
 		public DateTime CurrentTime { private set; get; }
 		private Airport airport;
 		private DateTime endTime;
-		private int speed;
 
-		public InterfaceLogicConnector(string path, int speed)
+		public InterfaceLogicConnector(string path)
 		{
-			this.speed = speed;
 			string[] strs = File.ReadAllLines(path);
 			airport = new Airport(strs);
 			FlightInfoLine endInfo = new FlightInfoLine(strs[strs.Length - 1]);
@@ -38,7 +38,6 @@ namespace AirportScoreboard
 		public void Iterate()
 		{
 			airport.AddTimeInMinutes(1);
-			Thread.Sleep(10000 / speed);
 			UpdateInfo();
 		}
 
@@ -51,7 +50,10 @@ namespace AirportScoreboard
 			DepInRecentFlight = airport.DepInLastFlight;
 			DepSummary = airport.DepSummary;
 			CurrentTime = airport.currentTime;
+			ArrInDayByHours = airport.ArrInDayByHours;
+			DepInDayByHours = airport.DepInDayByHours;
 			UpdateRecentFlight();
+			RecentFlightDirection = recentFlight.Direction;
 		}
 
 		private void UpdateRecentFlight()

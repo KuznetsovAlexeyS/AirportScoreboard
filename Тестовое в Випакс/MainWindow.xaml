@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirportScoreboard"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="Информационное табло аэропорта" Height="350" Width="550">
+        Title="Информационное табло аэропорта" Height="360" Width="700">
 	<Grid Margin="0,0,0,0" Height="320" VerticalAlignment="Top">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="40*"/>
@@ -21,8 +22,8 @@
 				<ColumnDefinition Width="150*"/>
 			</Grid.ColumnDefinitions>
 
-			<TextBlock Grid.Column="0" Text="Последний рейс" TextAlignment="Center" FontSize="20"/>
-			<TextBlock Grid.Column="1" Text="Время прибытия" TextAlignment="Center" FontSize="20"/>
+			<TextBlock Grid.Column="0" Text="Последний рейс" TextAlignment="Center" Margin="150, 0, 0, 0" FontSize="20"/>
+			<TextBlock Grid.Column="1" Text="Время" TextAlignment="Center" Margin="0, 0, 150, 0" FontSize="20" Name="RecentFlightLabel"/>
 
 		</Grid>
 
@@ -33,8 +34,8 @@
 				<ColumnDefinition Width="271*"/>
 			</Grid.ColumnDefinitions>
 
-			<TextBlock Grid.Column="0" Text="" TextAlignment="Center" FontSize="18" Name="RecentFlightRoute" Grid.ColumnSpan="2"/>
-			<TextBlock Grid.Column="2" Text="" TextAlignment="Center" FontSize="18" Name="RecentFlightTime"/>
+			<TextBlock Grid.Column="0" Text="" TextAlignment="Center" Margin="150, 0, 0, 0" FontSize="18" Name="RecentFlightRoute" Grid.ColumnSpan="2"/>
+			<TextBlock Grid.Column="2" Text="" TextAlignment="Center" Margin="0, 0, 150, 0" FontSize="18" Name="RecentFlightTime"/>
 
 		</Grid>
 
@@ -87,12 +88,21 @@
 
 		<Grid Grid.Row="3">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="20*"/>
+				<ColumnDefinition Width="15*"/>
 				<ColumnDefinition Width="40*"/>
+				<ColumnDefinition Width="5*"/>
 			</Grid.ColumnDefinitions>
 
 			<TextBlock Grid.Column="0" Text="Дата и время" TextAlignment="Center" VerticalAlignment="Center" FontSize="13"/>
-			<TextBlock Grid.Column="0" Text="Дата и время" TextAlignment="Center" VerticalAlignment="Bottom" FontSize="13" Name="CurrentTime" Margin="0,0,0,25"/>
+			<TextBlock Grid.Column="0" Text="" TextAlignment="Center" VerticalAlignment="Bottom" FontSize="13" Name="CurrentTime" Margin="0,0,0,25"/>
+
+			<Grid Grid.Column="1">
+				<lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left" Name="chart">
+					<lvc:CartesianChart.AxisX>
+						<lvc:Axis Title="" Labels="{Binding Labels}"></lvc:Axis>
+					</lvc:CartesianChart.AxisX>
+				</lvc:CartesianChart>
+			</Grid>
 
 		</Grid>
 	</Grid>

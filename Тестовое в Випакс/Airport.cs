@@ -11,11 +11,12 @@ namespace AirportScoreboard
 	{
 		public int ArrInLastFlight { private set; get; } // Arr - arrived
 		public int ArrInLastDay { private set; get; }
-		public int ArrInLastHour { private set; get; }
+		public int[] ArrInDayByHours { private set; get; } 
+		// ArrInDayByHours[0] - arrived in recent hour, ArrInDayByHours[1] - between 1 and 2 hours, etc.
 		public int ArrSummary { private set; get; }
 		public int DepInLastFlight { private set; get; } // Dep - departured
 		public int DepInLastDay { private set; get; }
-		public int DepInLastHour { private set; get; }
+		public int[] DepInDayByHours { private set; get; } // The same with ArrDayByHours.
 		public int DepSummary { private set; get; }
 		public Airplane RecentArrival { private set; get; }
 		public Airplane RecentDeparture { private set; get; }
@@ -28,11 +29,11 @@ namespace AirportScoreboard
 		{
 			ArrInLastFlight = 0;
 			ArrInLastDay = 0;
-			ArrInLastHour = 0;
+			ArrInDayByHours = new int[24];
 			ArrSummary = 0;
 			DepInLastFlight = 0;
 			DepInLastDay = 0;
-			DepInLastHour = 0;
+			DepInDayByHours = new int[24];
 			DepSummary = 0;
 			this.schedule = schedule;
 			schedulePointer = 0;
@@ -100,10 +101,13 @@ namespace AirportScoreboard
 				ArrInLastDay = airplanes
 					.Where(a => a.Direction == Direction.In)
 					.Sum(b => b.Passengers);
-				ArrInLastHour = airplanes
-					.Where(a => a.Direction == Direction.In)
-					.Where(b => b.Time.AddHours(1) > currentTime)
-					.Sum(c => c.Passengers);
+				for (int i = 1; i < 25; i++)
+				{
+					ArrInDayByHours[i-1] = airplanes
+						.Where(a => a.Direction == Direction.In)
+						.Where(b => b.Time.AddHours(i) > currentTime && b.Time.AddHours(i - 1) <= currentTime)
+						.Sum(c => c.Passengers);
+				}
 			}
 			if (RecentDeparture != null)
 			{
@@ -111,10 +115,13 @@ namespace AirportScoreboard
 				DepInLastDay = airplanes
 					.Where(a => a.Direction == Direction.Away)
 					.Sum(b => b.Passengers);
-				DepInLastHour = airplanes
-					.Where(a => a.Direction == Direction.Away)
-					.Where(b => b.Time.AddHours(1) > currentTime)
-					.Sum(c => c.Passengers);
+				for (int i = 1; i < 25; i++)
+				{
+					DepInDayByHours[i - 1] = airplanes
+						.Where(a => a.Direction == Direction.Away)
+						.Where(b => b.Time.AddHours(i) > currentTime && b.Time.AddHours(i - 1) <= currentTime)
+						.Sum(c => c.Passengers);
+				}
 			}
 		}
 	}
