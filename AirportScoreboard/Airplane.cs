@@ -31,7 +31,7 @@ namespace AirportScoreboard
 
 		private void GetCapacity()
 		{
-			var path = "Models.txt";
+			var path = "Models.txt"; // Для корректной работы тестов скопируйте файл Models в папку с решением .sln.
 			IEnumerable<string> data = File.ReadAllLines(path).Skip(1); // Первая строка - заголовок.
 			foreach(var str in data)
 			{
