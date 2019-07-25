@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace AirportScoreboard
@@ -22,7 +23,7 @@ namespace AirportScoreboard
 			this.Model = model;
 			GetCapacity();
 			Random rnd = new Random();
-			Passengers = rnd.Next(capacity+1); // +1 because airplane can be full.
+			Passengers = rnd.Next(capacity+1); // +1 потому что самолёт может быть полным.
 			this.Time = time;
 			this.City = city;
 			this.Direction = direction;
@@ -31,12 +32,12 @@ namespace AirportScoreboard
 		private void GetCapacity()
 		{
 			var path = "Models.txt";
-			IEnumerable<string> data = File.ReadAllLines(path).Skip(1); // First string is a title. 
+			IEnumerable<string> data = File.ReadAllLines(path).Skip(1); // Первая строка - заголовок.
 			foreach(var str in data)
 			{
 				var nameAndCapacity = str.Split(' ');
 				if (nameAndCapacity.Length < 2) throw new ArgumentException("File with models is incorrect"); 
-					// <2 because at least you must have model name and capacity.
+					// <2 потому что по крайней мере должно быть название модели и вместимость.
 				var capacity = -1;
 				if (!Int32.TryParse(nameAndCapacity[nameAndCapacity.Length - 1], out capacity))
 					throw new ArgumentException("Something is wrong with capacity");

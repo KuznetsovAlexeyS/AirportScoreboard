@@ -23,6 +23,7 @@ namespace AirportScoreboard
 	{
 		private Thread thread;
 		public int Speed { private set; get; }
+		private bool isCounting = false;
 		private string filePath;
 
 		public MainWindow()
@@ -40,14 +41,19 @@ namespace AirportScoreboard
 						break;
 					case Key.F2:
 						OpenFileDialog openFileDialog = new OpenFileDialog();
-						if (openFileDialog.ShowDialog() == true)
+						if (isCounting)
+						{
+							MessageBox.Show("Файл уже выбран.");
+						}
+						if (!isCounting && openFileDialog.ShowDialog() == true)
 						{
 							filePath = openFileDialog.FileName;
+							isCounting = true;
 							RunDisplay();
 						}
 						break;
 					case Key.F3:
-						var setSpeedWindow = new SetSpeed();
+						var setSpeedWindow = new SetSpeed(Speed);
 						setSpeedWindow.Show();
 						setSpeedWindow.Accept.Click += (send, args) =>
 						{
@@ -111,7 +117,7 @@ namespace AirportScoreboard
 			UpdateLayout();
 		}
 
-		//Chart area below
+		//Ниже - график.
 
 		private void DeclareChart()
 		{
@@ -127,7 +133,7 @@ namespace AirportScoreboard
 			SeriesCollection.Add(new ColumnSeries
 			{
 				Title = "Вылетело",
-				Values = new ChartValues<double>()
+				Values = new ChartValues<double>(),
 			});
 
 			Labels = new string[24];
@@ -136,7 +142,6 @@ namespace AirportScoreboard
 				Labels[23-i] = i.ToString();
 			}
 			Formatter = value => value.ToString("N");
-			chart.DisableAnimations = true;
 			DataContext = this;
 		}
 
@@ -148,7 +153,7 @@ namespace AirportScoreboard
 			SeriesCollection[0].Values.Clear();
 			for (int i = 0; i < 24; i++)
 			{
-				SeriesCollection[0].Values.Add(arrData[23-i]); // We are not arabs or japaneese, so its more comfortable for us to see columns flow from left to right
+				SeriesCollection[0].Values.Add(arrData[23-i]); // Необходимо для "прожождения" колонок справа налево.
 			}
 
 			SeriesCollection[1].Values.Clear();
@@ -162,7 +167,6 @@ namespace AirportScoreboard
 				Labels[23-i] = currentTime.AddHours(24-i).Hour.ToString();
 			}
 			chart.UpdateLayout();
-
 		}
 
 		private double[] CastToDouble(int[] array)

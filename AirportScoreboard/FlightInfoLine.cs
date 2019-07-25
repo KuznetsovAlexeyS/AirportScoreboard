@@ -42,7 +42,7 @@ namespace AirportScoreboard
 			if (!Int32.TryParse(splitedLine[3], out hour) || hour < 0 || hour >= 24) throw new ArgumentException("Date format is incorrect");
 			int minute;
 			if (!Int32.TryParse(splitedLine[4], out minute) || minute < 0 || minute >= 60) throw new ArgumentException("Date format is incorrect");
-			return new DateTime(year, month, day, hour, minute, 0, 0); // Seconds and milliseconds arn't matter in flight schedules.
+			return new DateTime(year, month, day, hour, minute, 0, 0); // Секунды и миллисекунды не важны в расписании полётов.
 		}
 
 		private Direction ExtractDirection(string line)
@@ -63,7 +63,7 @@ namespace AirportScoreboard
 		{
 			var model = new StringBuilder();
 			var splitedLine = line.Split(' ');
-			for (int i = 7; i < splitedLine.Length - 1; i++) // -1 because we dont need excess space at the end of the line.
+			for (int i = 7; i < splitedLine.Length - 1; i++) // -1 потому что нам не нужен лишний пробел в конце строки.
 			{
 				model.Append(splitedLine[i] + " ");
 			}

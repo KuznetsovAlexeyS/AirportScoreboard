@@ -22,7 +22,7 @@ namespace Тестовое_в_Випакс.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Тестовое_в_Випакс.Properties {
         ///   Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Тестовое_в_Випакс.Properties.Resources", typeof(Resources).Assembly);
@@ -51,12 +51,65 @@ namespace Тестовое_в_Випакс.Properties {
         ///   обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 2019 7 10 1 0 Departure Minsk Sukhoi Superjet 100
+        ///2019 7 10 1 12 Arrival Moscow Boeing 737
+        ///2019 7 10 1 35 Arrival Minsk Sukhoi Superjet 100
+        ///2019 7 10 1 53 Departure Moscow Sukhoi Superjet 100
+        ///2019 7 10 2 29 Departure Kiev Boeing 739
+        ///2019 7 10 2 37 Arrival Moscow Boeing 738
+        ///2019 7 10 2 58 Arrival Minsk Boeing 738
+        ///2019 7 10 3 33 Arrival Moscow Boeing 737
+        ///2019 7 10 4 12 Arrival Minsk Boeing 739
+        ///2019 7 10 4 47 Departure Kiev Boeing 738
+        ///2019 7 10 4 59 Departure Moscow Sukhoi Superjet 100
+        ///2019 7 10 5 3 [остаток строки не уместился]&quot;;.
+        /// </summary>
+        public static string Example {
+            get {
+                return ResourceManager.GetString("Example", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Airplane name - capacity
+        ///Boeing 737 200
+        ///Boeing 738 180
+        ///Boeing 739 130
+        ///Sukhoi Superjet 100 100.
+        /// </summary>
+        public static string Models {
+            get {
+                return ResourceManager.GetString("Models", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 2019 7 22 7 7 Arrival Minsk Boeing 739
+        ///2019 7 22 8 8 Departure Kiev Boeing 739
+        ///2019 7 22 9 9 Arrival Minsk Sukhoi Superjet 100
+        ///2019 7 22 10 10 Departure Moscow Boeing 738
+        ///2019 7 22 11 11 Arrival Minsk Boeing 739
+        ///2019 7 22 23 5 Departure Moscow Sukhoi Superjet 100
+        ///2019 7 23 3 41 Arrival Kiev Boeing 739
+        ///2019 7 23 5 37 Departure Kiev Boeing 737
+        ///2019 7 23 10 20 Departure Moscow Boeing 737
+        ///2019 7 23 13 4 Arrival Moscow Boeing 737
+        ///2019 7 23 17 58 Arrival Minsk Boeing 738
+        ///2019 7 23 18 32 Arrival Kiev Bo [остаток строки не уместился]&quot;;.
+        /// </summary>
+        public static string Schedule {
+            get {
+                return ResourceManager.GetString("Schedule", resourceCulture);
             }
         }
     }

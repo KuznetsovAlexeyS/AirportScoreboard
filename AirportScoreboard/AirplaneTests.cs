@@ -13,7 +13,7 @@ namespace AirportScoreboard
 		{
 			DateTime date = DateTime.Now;
 			var airplane = new Airplane("Sukhoi Superjet 100", date, "City", Direction.In);
-			// Change this test, when "Sukhoi Superjet 100" will be removed from Models.
+			// Поменять тест, когда "Sukhoi Superjet 100" будет удалён из Models.
 			Assert.IsTrue(
 				airplane.Model == "Sukhoi Superjet 100" &&
 				airplane.Time == date &&
@@ -32,7 +32,7 @@ namespace AirportScoreboard
 			for (int i = 0; i < 1000; i++)
 			{
 				var airplane = new Airplane("Sukhoi Superjet 100", date, "Moscow", Direction.In);
-				// Change this test, when "Sukhoi Superjet 100" will be removed from Models.
+				// Поменять тест, когда "Sukhoi Superjet 100" будет удалён из Models.
 				if (airplane.Passengers < 0 || airplane.Passengers > 100)
 				{
 					flag = false;

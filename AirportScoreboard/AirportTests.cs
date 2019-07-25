@@ -14,16 +14,22 @@ namespace AirportScoreboard
 		[Test]
 		public void DefaultValues()
 		{
-			var path = "Schedule.txt";
-			string[] strs = File.ReadAllLines(path);
+			string[] strs = new string[]
+			{
+				"2019 7 22 7 7 Arrival Minsk Boeing 739",
+				"2019 7 22 8 8 Arrival Kiev Boeing 739",
+				"2019 7 22 9 9 Arrival Minsk Sukhoi Superjet 100",
+				"2019 7 22 10 10 Arrival Moscow Boeing 738",
+				"2019 7 22 11 11 Arrival Minsk Boeing 739",
+			};
 			Airport airport = new Airport(strs);
 			airport.AddTimeInMinutes(600);
 			Assert.IsTrue(
 				airport.currentTime.Hour == 17 &&
 				airport.DepInLastDay == 0 &&
 				airport.DepInLastFlight == 0 &&
-				airport.RecentArrival.City == "Moscow" &&
-				airport.RecentArrival.Model == "Boeing 738" &&
+				airport.RecentArrival.City == "Minsk" &&
+				airport.RecentArrival.Model == "Boeing 739" &&
 				airport.ArrSummary > -1
 				);
 		}
@@ -74,7 +80,7 @@ namespace AirportScoreboard
 		}
 
 		[Test]
-		public void Dequeueing() // We cant make correct Asserts, because passengers amount depends on random. So just watch debugging.
+		public void Dequeueing() // Из-за рандома мы не можем положиться на Assert, поэтому просто пройдитесь отладкой.
 		{
 			string[] strs = new string[3];
 			strs[0] = "2019 7 22 7 7 Arrival Minsk Boeing 739";
@@ -93,7 +99,7 @@ namespace AirportScoreboard
 			strs[1] = "2019 7 22 7 8 Arrival Moscow Boeing 739";
 			Airport airport = new Airport(strs);
 			var recArr = airport.RecentArrival.Passengers;
-			System.Threading.Thread.Sleep(17);
+			System.Threading.Thread.Sleep(17); // Иначе случайно сгенерированное количество пассажиров будет одинаково в обоих случаях. 
 			airport.AddTimeInMinutes(1);
 			Assert.IsTrue(airport.RecentArrival.Passengers != recArr);
 		}

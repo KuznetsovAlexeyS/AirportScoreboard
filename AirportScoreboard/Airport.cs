@@ -12,11 +12,11 @@ namespace AirportScoreboard
 		public int ArrInLastFlight { private set; get; } // Arr - arrived
 		public int ArrInLastDay { private set; get; }
 		public int[] ArrInDayByHours { private set; get; } 
-		// ArrInDayByHours[0] - arrived in recent hour, ArrInDayByHours[1] - between 1 and 2 hours, etc.
+		// ArrInDayByHours[0] - прибыло в последний час, ArrInDayByHours[1] - между 1 и 2 часами, и т. д.
 		public int ArrSummary { private set; get; }
 		public int DepInLastFlight { private set; get; } // Dep - departured
 		public int DepInLastDay { private set; get; }
-		public int[] DepInDayByHours { private set; get; } // The same with ArrDayByHours.
+		public int[] DepInDayByHours { private set; get; } // Аналогично с ArrDayByHours.
 		public int DepSummary { private set; get; }
 		public Airplane RecentArrival { private set; get; }
 		public Airplane RecentDeparture { private set; get; }

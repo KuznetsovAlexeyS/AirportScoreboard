@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:AirportScoreboard"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="Информационное табло аэропорта" Height="360" Width="700">
-	<Grid Margin="0,0,0,0" Height="320" VerticalAlignment="Top">
+        Title="Информационное табло аэропорта" Height="440" Width="700">
+	<Grid Margin="0,0,0,0" Height ="400" VerticalAlignment="Top">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="40*"/>
-			<RowDefinition Height="40*"/>
-			<RowDefinition Height="160*"/>
-			<RowDefinition Height="120*"/>
+			<RowDefinition Height="30*"/>
+			<RowDefinition Height="30*"/>
+			<RowDefinition Height="100*"/>
+			<RowDefinition Height="200*"/>
 		</Grid.RowDefinitions>
 
 
@@ -94,14 +94,14 @@
 			</Grid.ColumnDefinitions>
 
 			<TextBlock Grid.Column="0" Text="Дата и время" TextAlignment="Center" VerticalAlignment="Center" FontSize="13"/>
-			<TextBlock Grid.Column="0" Text="" TextAlignment="Center" VerticalAlignment="Bottom" FontSize="13" Name="CurrentTime" Margin="0,0,0,25"/>
+			<TextBlock Grid.Column="0" Text="" TextAlignment="Center" VerticalAlignment="Center" FontSize="13" Name="CurrentTime" Margin="0,40,0,0"/>
 
 			<Grid Grid.Column="1">
 				<lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left" Name="chart">
 					<lvc:CartesianChart.AxisX>
 						<lvc:Axis Title=""  Labels="{Binding Labels}">
 							<lvc:Axis.Separator>
-								<lvc:Separator Step="1" />
+								<lvc:Separator Step="1" Stroke="Black"/>
 							</lvc:Axis.Separator>
 						</lvc:Axis>
 					</lvc:CartesianChart.AxisX>

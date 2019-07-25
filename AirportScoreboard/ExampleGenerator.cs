@@ -23,7 +23,7 @@ namespace AirportScoreboard
 				var numberOfModel = rnd.Next(GetAmountOfModels());
 				str.Append(date.Year.ToString() + " " + date.Month.ToString() + " " + date.Day.ToString() 
 					+ " " + date.Hour.ToString() + " " + date.Minute.ToString() + " ");
-				date = date.AddMinutes(rnd.Next(10, 300));
+				date = date.AddMinutes(rnd.Next(5, 40));
 				if (rnd.Next(2) == 0)
 				{
 					str.Append("Arrival ");
@@ -45,7 +45,7 @@ namespace AirportScoreboard
 		{
 			var path = Directory.GetCurrentDirectory() + "\\Models.txt";
 			string[] data = File.ReadAllLines(path);
-			return data.Length - 1; // First string is a title, so -1.
+			return data.Length - 1; // Первая строка - заголовок, так что -1.
 		}
 
 		private static string GetModel(int number)

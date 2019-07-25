@@ -20,9 +20,10 @@ namespace AirportScoreboard
 	public partial class SetSpeed : Window
 	{
 		public int Speed { private set; get; }
-		public SetSpeed()
+		public SetSpeed(int currentSpeed)
 		{
 			InitializeComponent();
+			CurrentSpeedLabel.Text = "Текущая скорость — " + currentSpeed.ToString();
 			Accept.Click += (sender, args) =>
 			{
 				int speed;
