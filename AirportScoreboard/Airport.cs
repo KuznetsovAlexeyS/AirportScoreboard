@@ -40,7 +40,21 @@ namespace AirportScoreboard
 			FlightInfoLine info = new FlightInfoLine(schedule[schedulePointer]);
 			airplanes = new Queue<Airplane>();
 			currentTime = info.Date;
+			if (!IsScheduleCorrect())
+				throw new ArgumentException("В расписании есть ситуация, когда в одной из строк стоит более ранняя дата, чем в предыдущей.");
 			UpdateInfo();
+		}
+
+		private bool IsScheduleCorrect() // Проверяет, нет ли в расписании ситуации, когда следующая строка имеет более раннюю дату.
+		{
+			if (schedule.Length == 1) return true;
+			for(int i=1; i<schedule.Length; i++)
+			{
+				var firstLine = new FlightInfoLine(schedule[i-1]);
+				var secondLine = new FlightInfoLine(schedule[i]);
+				if (firstLine.Date > secondLine.Date) return false;
+			}
+			return true;
 		}
 
 		public void AddTimeInMinutes(int addedTime)

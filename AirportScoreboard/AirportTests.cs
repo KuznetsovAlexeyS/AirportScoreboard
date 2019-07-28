@@ -80,7 +80,7 @@ namespace AirportScoreboard
 		}
 
 		[Test]
-		public void Dequeueing() // Из-за рандома мы не можем положиться на Assert, поэтому просто пройдитесь отладкой.
+		public void Dequeueing() // Общий случай удаления из очереди, см. отладку.
 		{
 			string[] strs = new string[3];
 			strs[0] = "2019 7 22 7 7 Arrival Minsk Boeing 739";
@@ -102,6 +102,49 @@ namespace AirportScoreboard
 			System.Threading.Thread.Sleep(17); // Иначе случайно сгенерированное количество пассажиров будет одинаково в обоих случаях. 
 			airport.AddTimeInMinutes(1);
 			Assert.IsTrue(airport.RecentArrival.Passengers != recArr);
+		}
+
+		[Test]
+		public void ScheduleCorrectness()
+		{
+			string[] strs = new string[2];
+			strs[0] = "2019 7 22 7 7 Arrival Minsk Boeing 739";
+			strs[1] = "2019 7 22 7 5 Arrival Moscow Boeing 739";
+			Assert.Throws<ArgumentException>(() => new Airport(strs));
+		}
+
+		[Test]
+		public void PassangeersByHours() // Число пассажиров в самолёте может быть и 0, так что если тест красный, попробуйте запустить его ещё раз.
+		{
+			string[] strs = new string[8];
+			strs[0] = "2019 7 22 7 7 Arrival Minsk Boeing 739";
+			strs[1] = "2019 7 22 8 6 Arrival Moscow Sukhoi Superjet 100";
+			strs[2] = "2019 7 22 9 5 Arrival Kiev Boeing 739";
+			strs[3] = "2019 7 22 10 4 Arrival Kiev Boeing 739";
+			strs[4] = "2019 7 22 11 3 Departure Minsk Boeing 739";
+			strs[5] = "2019 7 22 12 2 Departure Moscow Sukhoi Superjet 100";
+			strs[6] = "2019 7 22 13 1 Departure Kiev Boeing 739";
+			strs[7] = "2019 7 22 14 0 Departure Kiev Boeing 739";
+			Airport airport = new Airport(strs);
+			for(int i=0; i<7 * 60; i++)
+			{
+				airport.AddTimeInMinutes(1);
+				System.Threading.Thread.Sleep(3);
+			}
+			Assert.IsTrue(
+				airport.ArrInDayByHours[0] == 0 &&
+				airport.ArrInDayByHours[1] == 0 &&
+				airport.ArrInDayByHours[2] == 0 &&
+				airport.ArrInDayByHours[3] == 0 &&
+				airport.ArrInDayByHours[4] != 0 &&
+				airport.ArrInDayByHours[5] != 0 &&
+				airport.ArrInDayByHours[6] != 0 &&
+				airport.ArrInDayByHours[7] != 0 &&
+				airport.DepInDayByHours[0] != 0 &&
+				airport.DepInDayByHours[1] != 0 &&
+				airport.DepInDayByHours[2] != 0 &&
+				airport.DepInDayByHours[3] != 0
+				);
 		}
 	}
 }
