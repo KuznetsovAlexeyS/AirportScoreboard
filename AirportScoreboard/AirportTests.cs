@@ -26,8 +26,8 @@ namespace AirportScoreboard
 			airport.AddTimeInMinutes(600);
 			Assert.IsTrue(
 				airport.currentTime.Hour == 17 &&
-				airport.DepInLastDay == 0 &&
-				airport.DepInLastFlight == 0 &&
+				airport.DepInRecentDay == 0 &&
+				airport.DepInRecentFlight == 0 &&
 				airport.RecentArrival.City == "Minsk" &&
 				airport.RecentArrival.Model == "Boeing 739" &&
 				airport.ArrSummary > -1
@@ -48,7 +48,7 @@ namespace AirportScoreboard
 			string[] strs = File.ReadAllLines(path);
 			Airport airport = new Airport(strs);
 			airport.AddTimeInMinutes(10000000);
-			Assert.IsTrue(airport.DepInLastDay == 0 && airport.ArrInLastDay == 0);
+			Assert.IsTrue(airport.DepInRecentDay == 0 && airport.ArrInRecentDay == 0);
 		}
 
 		[Test]

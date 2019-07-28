@@ -9,13 +9,13 @@ namespace AirportScoreboard
 {
 	class Airport
 	{
-		public int ArrInLastFlight { private set; get; } // Arr - arrived
-		public int ArrInLastDay { private set; get; }
+		public int ArrInRecentFlight { private set; get; } // Arr - arrived
+		public int ArrInRecentDay { private set; get; }
 		public int[] ArrInDayByHours { private set; get; } 
 		// ArrInDayByHours[0] - прибыло в последний час, ArrInDayByHours[1] - между 1 и 2 часами, и т. д.
 		public int ArrSummary { private set; get; }
-		public int DepInLastFlight { private set; get; } // Dep - departured
-		public int DepInLastDay { private set; get; }
+		public int DepInRecentFlight { private set; get; } // Dep - departured
+		public int DepInRecentDay { private set; get; }
 		public int[] DepInDayByHours { private set; get; } // Аналогично с ArrDayByHours.
 		public int DepSummary { private set; get; }
 		public Airplane RecentArrival { private set; get; }
@@ -27,12 +27,12 @@ namespace AirportScoreboard
 
 		public Airport(string[] schedule)
 		{
-			ArrInLastFlight = 0;
-			ArrInLastDay = 0;
+			ArrInRecentFlight = 0;
+			ArrInRecentDay = 0;
 			ArrInDayByHours = new int[24];
 			ArrSummary = 0;
-			DepInLastFlight = 0;
-			DepInLastDay = 0;
+			DepInRecentFlight = 0;
+			DepInRecentDay = 0;
 			DepInDayByHours = new int[24];
 			DepSummary = 0;
 			this.schedule = schedule;
@@ -111,8 +111,8 @@ namespace AirportScoreboard
 		{
 			if (RecentArrival != null)
 			{
-				ArrInLastFlight = RecentArrival.Passengers;
-				ArrInLastDay = airplanes
+				ArrInRecentFlight = RecentArrival.Passengers;
+				ArrInRecentDay = airplanes
 					.Where(a => a.Direction == Direction.In)
 					.Sum(b => b.Passengers);
 				for (int i = 1; i < 25; i++)
@@ -125,8 +125,8 @@ namespace AirportScoreboard
 			}
 			if (RecentDeparture != null)
 			{
-				DepInLastFlight = RecentDeparture.Passengers;
-				DepInLastDay = airplanes
+				DepInRecentFlight = RecentDeparture.Passengers;
+				DepInRecentDay = airplanes
 					.Where(a => a.Direction == Direction.Away)
 					.Sum(b => b.Passengers);
 				for (int i = 1; i < 25; i++)

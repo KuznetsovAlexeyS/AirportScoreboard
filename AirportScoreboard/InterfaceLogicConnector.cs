@@ -43,11 +43,11 @@ namespace AirportScoreboard
 
 		private void UpdateInfo()
 		{
-			ArrInRecentFlight = airport.ArrInLastFlight;
-			ArrInRecentDay = airport.ArrInLastDay;
+			ArrInRecentFlight = airport.ArrInRecentFlight;
+			ArrInRecentDay = airport.ArrInRecentDay;
 			ArrSummary = airport.ArrSummary;
-			DepInRecentDay = airport.DepInLastDay;
-			DepInRecentFlight = airport.DepInLastFlight;
+			DepInRecentDay = airport.DepInRecentDay;
+			DepInRecentFlight = airport.DepInRecentFlight;
 			DepSummary = airport.DepSummary;
 			CurrentTime = airport.currentTime;
 			ArrInDayByHours = airport.ArrInDayByHours;
